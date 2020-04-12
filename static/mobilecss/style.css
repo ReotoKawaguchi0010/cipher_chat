@@ -1,0 +1,46 @@
+.else_user{
+    background-color: #ffffff;
+    width: 40%;
+    font-size: 200%;
+    text-align:center;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    margin-left: 60%;
+}
+.change_text{
+    background-color: #c0fd22;
+    width: 40%;
+    font-size: 200%;
+    text-align:center;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.chat_room{
+    width: 100%;
+    text-align: right;
+}
+
+#test_reloads_2{
+    text-align: left;
+    background: #c0fd22;
+    width: 50%;
+}
+
+.chat_input_text{
+    text-align: center;
+    font-size: 200%;
+}
+
+.logout_button{
+    width: 100%;
+    background-color: darkblue;
+}
+
+.logout_button button{
+    font-size: 200%;
+    color: #ffffff;
+}
+
+.page_red {
+    color: red;
+}

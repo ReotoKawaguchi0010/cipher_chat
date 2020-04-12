@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Cipher Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        .search {
+            text-align: center;
+        }
+
+        .search-page-name{
+            margin-top: 5%;
+        }
+
+        .search-page-button{
+            margin-left: 54%;
+        }
+
+        .copy-right{
+            text-align: center;
+        }
+
+        .menu-content{
+            margin-top: 1rem;
+        }
+        .menu-content a{
+            color: #343a40;
+        }
+    </style>
+</head>
+    <body class="wrap">
+    <div class="side-area">
+        <div class="menu">menu</div>
+        <div class="search">
+            <form>
+                <input type="text" size="20" placeholder="page name" class="search-page-name">
+                <input type="submit" value="Search" class="search-page-button">
+            </form>
+            <div class="menu-content">
+                <div><a href="/">Top Page</a></div>
+                <hr>
+                <div><a href="/make_page">Making Page</a></div>
+                <hr>
+                <div><a href="/">Chat Room</a></div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="main-area">
+        <header class="header">
+            <div class="block-header">
+                <img src="{{ url_for('static', filename='img/cipherchat_logo.png') }}" width="10%">
+                <b class="username">{{ username }}</b>
+                <a href="{{ url_for('log_out')}}" class="logout_button"><button>Log out</button></a>
+            </div>
+        </header>
+        <main class="main">
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer class="footer"><div class="copy-right">&copy;2020 Cipher Chat</div></footer>
+    </div>
+    </body>
+</html>

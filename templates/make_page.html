@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <form action="/make_page" method="post">
+        <div class="page_name">page name</div>
+        <input type="text" name="page_name_title">
+        <div>making page click here</div>
+        <input type="submit" name="making_page" value="send">
+    </form>
+{% endblock %}

@@ -1,0 +1,4 @@
+test = ''
+
+
+print(bool(test))

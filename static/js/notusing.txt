@@ -1,0 +1,63 @@
+    <script>
+        $(function () {
+
+            function send_ajax(){
+                let data = {
+                    'text': $('#test_text').val(),
+                    'url': $(location).attr('port')
+                };
+
+                $.ajax({
+                    url: '/model',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function(response){
+                    },
+                    error: function(error){
+                    }
+                });
+            }
+
+            function post_ajax(now_user){
+                $.ajax({
+                    type: 'GET',
+                    url: '/text.json',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('.chat_text div').remove();
+                        $('.change_text').remove();
+
+                        for (let i=0; i<=Object.keys(data).length-1; i++){
+                            let letter = data[i]['text'];
+                            let username = data[i]['username'];
+
+                            if (now_user == username){
+                                $('.chat_text').append('<div class=now_user>' + letter + '</div>')
+                            }else{
+                                $('.chat_text').append('<div class=else_user>' + letter + '</div>')
+                            }
+                        }
+                    }
+                });
+            }
+
+            const now_user = '{{ username }}';
+            setInterval( function () {
+                post_ajax(now_user)
+            } , 5000 );
+
+            $('#test_button').click(function(){
+                send_ajax()
+            });
+
+            $('#test_text').keypress(function(e){
+                if ( e.which == 13 ){
+                    $('.chat_text').append('<div class=change_text>' + $('#test_text').val() + '</div>')
+                    send_ajax()
+                }
+            });
+
+        })
+    </script>
