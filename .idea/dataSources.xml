@@ -19,5 +19,11 @@
         <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="chat [2]" uuid="50c70977-3c7c-4dc1-a269-76963c035f59">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/models/chat.db</jdbc-url>
+    </data-source>
   </component>
 </project>

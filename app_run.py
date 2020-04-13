@@ -8,6 +8,9 @@ from flask import redirect
 from flask import session
 from flask import url_for
 
+from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
+
 import models.person
 import models.text
 import models.page_ids
@@ -101,7 +104,8 @@ def log_out():
 @app.route('/model', methods=['GET', 'POST'])
 def model():
     if request.method == 'POST':
-        # file_op = models.text.UserOperation()
+        file_op = models.text.UserOperation()
+        file_op2 = models.japanese_text.UserOperation()
         # encode = cipher.ShiftCipher()
         # letter = encode.shift_letters_encode(request_json['text'], 3)
         request_json = request.json
@@ -110,11 +114,13 @@ def model():
         page_id = request_json['page_id']
         japanese_letters = request_json['to_japanese_letters']
 
-        if util.alphabet_check(letter):
-            print(request_json, username, letter, page_id, japanese_letters)
+        if not util.alphabet_check(letter):
+            japanese_letters = '/ja/' + japanese_letters
+            file_op.create_text(username, japanese_letters, page_id)
+            file_op2.create_text(japanese_letters, letter, page_id)
         else:
-            print(request_json, username, letter, page_id)
-        # file_op.create_text(username, letter, page_id)
+            file_op.create_text(username, letter, page_id)
+
         try:
             request_json = json.dumps(request_json)
             return request_json, 200
@@ -139,7 +145,14 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', default=8085,
                         type=int, help='port listen on')
     args = parser.parse_args()
+    host = 'localhost'
     port = args.port
-
-
-    app.run(host='localhost', port=port, threaded=True, debug=True)
+    # host_port = (host, port)
+    #
+    # server = WSGIServer(
+    #     host_port,
+    #     app,
+    #     handler_class=WebSocketHandler,
+    # )
+    # server.serve_forever()
+    app.run(host=host, port=port, threaded=True, debug=True)

@@ -6,7 +6,7 @@ import logging
 
 import models.init
 
-engine = models.init.engine(memory=True)
+engine = models.init.engine()
 
 Base = sqlalchemy.ext.declarative.declarative_base()
 
@@ -42,11 +42,10 @@ class UserOperation(object):
         finally:
             self.session.close()
 
-    def read_text(self, id_num=None):
+    def read_text(self, decode_letter):
         try:
             texts = self.session.query(JapaneseText).all()
             all_database = []
-            result_dict = {}
 
             for text in texts:
                 dict_all = {
@@ -57,12 +56,12 @@ class UserOperation(object):
                 all_database.append(dict_all)
 
             for i in range(len(all_database)):
-                result_dict[i] = all_database[i]
-            result = result_dict
+                if decode_letter == all_database[i]['text']:
+                    result = all_database[i]
+                    break
 
-            if id_num is None:
-                return result
-            return result[id_num]
+            return result
+
         except:
             logging.error('fail')
         finally:
@@ -73,4 +72,4 @@ if __name__ == '__main__':
 
     op.create_text('ファファファ', 'test', 2)
 
-    print(op.read_text())
+    print(op.read_text('test'))
