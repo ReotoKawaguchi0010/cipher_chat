@@ -25,10 +25,8 @@ app = Flask(__name__, template_folder='./templates', static_folder='./static')
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'username' in session:
-        op = models.page_ids.UserOperation()
-        all_data = op.read_database()
         username = session['username']
-        return render_template('./home.html', all_data=all_data, for_all_data=range(len(all_data)), username=username)
+        return render_template('./desc.html', username=username)
     return redirect('/login')
 
 @app.route('/<int:pk>', methods=['GET', 'POST'])
@@ -47,6 +45,18 @@ def page_id(pk):
         except:
             return redirect(url_for('index', nothing_page='this page is not existence'))
     return redirect('/login')
+
+@app.route('/chat_room', methods=['GET', 'POST'])
+def chat_room():
+    if 'username' in session:
+        op = models.page_ids.UserOperation()
+        all_data = op.read_database()
+        username = session['username']
+        return render_template('./chat_room.html',
+                               username=username,
+                               all_data=all_data,
+                               for_all_data=range(len(all_data)))
+    return redirect(url_for('index'))
 
 @app.route('/make_page', methods=['GET', 'POST'])
 def make_page():

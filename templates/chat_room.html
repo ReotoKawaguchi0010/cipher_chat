@@ -5,7 +5,7 @@
     <div class="page-titles">
         {% if all_data %}
         {% for num in for_all_data %}
-        <div><span class="title-num">{{ num+1 }}</span><a href="/{{ all_data[num]['id'] }}">{{ all_data[num]['page_title'] }}</a></div>
+        <div><span class="title-num">{{ num + 1 }}</span><a href="/{{ all_data[num]['id'] }}">{{ all_data[num]['page_title'] }}</a></div>
         {% endfor %}
         {% endif %}
     </div>

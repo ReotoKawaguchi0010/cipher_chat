@@ -12,11 +12,17 @@ class GetJson extends XMLHttpRequest{
     public getJson(){
         this.addEventListener('load', function(){
             let get_json = this.response;
+            let username = document.getElementsByClassName('username')[0].textContent;
 
             for (let i in get_json){
                 let elements = document.querySelectorAll<HTMLDivElement>('.chat_text');
-                const $newText: HTMLDivElement = document.createElement('div');
+                let $newText: HTMLDivElement = document.createElement('div');
                 let $test = document.createTextNode(get_json[i]['text']);
+                if (get_json[i]['username'] == username){
+                    $newText.className = 'now_user'
+                }else {
+                    $newText.className = 'else_user'
+                }
                 $newText.appendChild($test);
 
                 elements.forEach(element => {
@@ -59,7 +65,7 @@ function main(){
     let req = new GetJson();
     let test = document.getElementsByTagName('input');
     let airList: string[] = [];
-
+    console.log();
     req.getJson();
     test[2].addEventListener('keydown', (event) => {
         if(event.key == 'Backspace'){

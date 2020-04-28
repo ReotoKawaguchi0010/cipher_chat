@@ -2,10 +2,32 @@
 
 
 {% block content %}
-    <form action="/make_page" method="post">
-        <div class="page_name">page name</div>
-        <input type="text" name="page_name_title">
+    <form action="/make_page" method="post" class="make_page">
+        <h1>Making Page</h1>
+        <div class="page_name">page name
+            <input type="text" name="page_name_title">
+        </div>
+        <div>
+            <h3>option</h3>
+            <p>append option?</p>
+            <div>
+                <select class="option_item">
+                    <option>ShiftCipher</option>
+                    <option>ScytaleCipher</option>
+                    <option>Enigma</option>
+                </select>
+            </div>
+            <div class="option_button" style="margin-left:40%;width: 20%; border: 1px solid #b97ebb; border-radius: 5px; text-align: center;">Decision</div>
+            <div id="append_option" style="border: 1px solid red; border-radius: 5px;"></div>
+        </div>
         <div>making page click here</div>
         <input type="submit" name="making_page" value="send">
     </form>
+
+    <script src="{{ url_for('static', filename='js/dist/page_option.js') }}"></script>
+    <style>
+        form.make_page{
+            text-align: center;
+        }
+    </style>
 {% endblock %}
